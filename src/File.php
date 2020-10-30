@@ -9,55 +9,137 @@
 
 namespace Hzz;
 
+/**
+ * Class File
+ * @package Hzz
+ */
 class File
 {
-    public static function upload($file, $dir = "upload")
+    private static $file = null;
+
+    /**
+     * @return File|null
+     */
+    public static function singleton()
+    {
+        if (self::$file === null) {
+            self::$file = new self();
+        }
+        return self::$file;
+    }
+
+    /**
+     * 上传图片到本地
+     * @param string $field_name 上传图片的字段名称
+     * @param string $dir 指定路径
+     * @return string
+     * @throws \Exception
+     */
+    public function upload($field_name = "file", $dir = '')
     {
         // 允许上传的图片后缀
         $allowedExts = array("gif", "jpeg", "jpg", "png");
-        $temp = explode(".", $_FILES["file"]["name"]);
+        $temp = explode(".", $_FILES[$field_name]["name"]);
         $extension = end($temp);     // 获取文件后缀名
-        if ((($_FILES["file"]["type"] == "image/gif")
-                || ($_FILES["file"]["type"] == "image/jpeg")
-                || ($_FILES["file"]["type"] == "image/jpg")
-                || ($_FILES["file"]["type"] == "image/pjpeg")
-                || ($_FILES["file"]["type"] == "image/x-png")
-                || ($_FILES["file"]["type"] == "image/png"))
-            && ($_FILES["file"]["size"] < 204800)   // 小于 200 kb
+        if ((($_FILES[$field_name]["type"] == "image/gif")
+                || ($_FILES[$field_name]["type"] == "image/jpeg")
+                || ($_FILES[$field_name]["type"] == "image/jpg")
+                || ($_FILES[$field_name]["type"] == "image/pjpeg")
+                || ($_FILES[$field_name]["type"] == "image/x-png")
+                || ($_FILES[$field_name]["type"] == "image/png"))
+            && ($_FILES[$field_name]["size"] < 5242880)   // 小于 5M = 5*1024KB*1024B
             && in_array($extension, $allowedExts)) {
-            if ($_FILES["file"]["error"] > 0) {
-                echo "错误：: " . $_FILES["file"]["error"] . "<br>";
+            if ($_FILES[$field_name]["error"] > 0) {
+                throw new \Exception($_FILES[$field_name]["error"]);
             } else {
 
-                // 如果 upload 目录不存在该文件则将文件上传到 upload 目录下
-                move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $_FILES["file"]["name"]);
-                echo "文件存储在: " . "upload/" . $_FILES["file"]["name"];
+                if (empty($dir)) {
+                    $dir = $_SERVER['DOCUMENT_ROOT'] . '/pics/';
+                }
 
+                if (!is_dir($dir)) {
+                    mkdir($dir);
+                }
+
+                $destination = $dir . uniqid() . '.' . $extension;
+                $move = move_uploaded_file($_FILES[$field_name]["tmp_name"], $destination);
+
+                if ($move) {
+                    return $destination;
+                } else {
+                    throw new \Exception("上传失败！");
+                }
             }
         } else {
-            echo "非法的文件格式";
+            throw new \Exception("非法的文件格式");
         }
     }
 
-    public static function delete($file)
+    /**
+     * 删除本地图片
+     * @param $file
+     * @return bool
+     */
+    public function delete($file)
     {
         return @unlink($file);
     }
 
-    public static function http($url, $filepath, $headers = null)
+    /**
+     * 向第三方图床发起上传图片请求
+     * @param UploadPicInterface $entity
+     * @return array|mixed
+     * @throws \Exception
+     */
+    public function http(UploadPicInterface $entity) // $entity
     {
-        $post_data = array(
-            "foo" => "bar",
-            //要上传的本地文件地址
-            "upload" => "@".'E:\www\project\dexter\packagist\free-pic\free-pic\1.png'
-        );
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
-        $output = curl_exec($ch);
-        curl_close($ch);
-        return $output;
+        $field_name = $entity->field_name ? $entity->field_name : 'file';
+        $url = $entity->url;
+        $headers = $entity->headers ? $entity->headers : [];
+        $filepath = $entity->filepath;
+        try {
+            $ch = curl_init();
+
+            // 版本兼容处理
+            if (class_exists('\CURLFile')) {// 这里用特性检测判断php版本
+                curl_setopt($ch, CURLOPT_SAFE_UPLOAD, true);
+                $data = array($field_name => new \CURLFile(realpath($filepath)));//>=5.5
+            } else {
+                if (defined('CURLOPT_SAFE_UPLOAD')) {
+                    curl_setopt($ch, CURLOPT_SAFE_UPLOAD, false);
+                }
+                $data = array($field_name => '@' . realpath($filepath));//<=5.5
+            }
+
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            //跳过SSL验证
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, '0');
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, '0');
+
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+            if (!empty($entity->proxy)) {
+                curl_setopt($ch, CURLOPT_PROXY, $entity->proxy);
+            }
+
+            $output = curl_exec($ch);
+            $error = curl_error($ch);
+
+            if (!empty($error)) {
+                return [
+                    'curl_error' => $error
+                ];
+            }
+
+            curl_close($ch);
+
+            return json_decode($output, true);
+        } catch (\Exception $exception) {
+            throw new \Exception($exception->getMessage());
+        }
     }
+
 }

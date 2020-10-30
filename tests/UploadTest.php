@@ -9,9 +9,26 @@
 
 class UploadTest extends \PHPUnit\Framework\TestCase
 {
-    public function test_xxx()
+    public function test_freePic_sm_upload()
     {
-        var_dump(312312);
-        $this->assertTrue(true);
+        $serve = \Hzz\FreePic::create('sm'); // img_kr or sm
+
+        $serve->proxy = 'http://127.0.0.1:58591';
+
+        $u = $serve->upload("D:\\phpstudy_pro\\WWW\\org\\private-free-pic\\tests\\1.png");
+
+        var_dump($u);
+        $this->assertNotEmpty($u);
+    }
+
+    public function test_freePic_img_kr_upload()
+    {
+        $serve = \Hzz\FreePic::create('img_kr'); // img_kr or sm
+
+        $u = $serve->upload("D:\\phpstudy_pro\\WWW\\org\\private-free-pic\\tests\\1.png");
+
+        var_dump($u);
+        $this->assertNotEmpty($u);
+
     }
 }

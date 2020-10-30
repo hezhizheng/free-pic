@@ -1,6 +1,6 @@
 {
     "name": "hzz/free-pic",
-    "description": "free pic",
+    "description": "free pic 免费图床 | 无存储限制 | 无需上传凭证 | 无同源跨域检测",
     "type": "library",
     "require": {
         "php": ">=5.6.0",

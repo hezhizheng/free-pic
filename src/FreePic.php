@@ -19,9 +19,9 @@ class FreePic
 
     /**
      * @param $type
-     * @return mixed|Sm|ImgKr
+     * @return mixed|UploadPicInterface
      */
-    public static function create($type)
+    public static function create($type = 'img_kr')
     {
         return new self::$map[$type];
     }

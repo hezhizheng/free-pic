@@ -9,15 +9,27 @@
 
 namespace Hzz;
 
+/**
+ * Class ImgKr
+ * @package Hzz
+ */
 class ImgKr implements UploadPicInterface
 {
+    /**
+     * @param $file
+     * @return array|mixed
+     * @throws \Exception
+     */
     public function upload($file)
     {
-        // is_file : file::upload() -> file::http() -> file::delete()
-        // !is_file : file::http() -> file::delete()
-        // is
+        $this->url = UploadPicInterface::IMG_KR_URL;
+        $this->filepath = $file;
+        $this->headers = [
+            'Referer: https://imgkr.com/'
+        ];
 
-        // TODO: Implement upload() method.
+        $res = File::singleton()->http($this);
+        return isset($res["data"]) ? $res["data"] : '';
     }
 
     public function delete($file)
