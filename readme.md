@@ -2,6 +2,10 @@
 
 > [体验demo](http://free-pic.hzz.cool/upload.html)
 
+> [github 地址](https://github.com/hezhizheng/free-pic)
+
+> [packagist 地址](https://packagist.org/packages/hzz/free-pic)
+
 
 ## feature
 - 三无图床（无存储限制 | 无需上传凭证 | 无同源跨域检测）
