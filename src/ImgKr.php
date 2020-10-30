@@ -15,6 +15,12 @@ namespace Hzz;
  */
 class ImgKr implements UploadPicInterface
 {
+    public $url;
+    public $filepath;
+    public $field_name;
+    public $headers;
+    public $proxy;
+
     /**
      * @param $file
      * @return array|mixed
