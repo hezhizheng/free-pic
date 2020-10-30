@@ -1,11 +1,14 @@
 ## free-pic 免费图床 
 
+> [体验demo](http://free-pic.hzz.cool/upload.html)
+
+
 ## feature
 - 三无图床（无存储限制 | 无需上传凭证 | 无同源跨域检测）
 - 支持使用代理、简单易用、方便扩展
 - 支持 "gif", "jpeg", "jpg", "png" 图片格式
 
-## 以支持图床
+## 支持图床
 - [sm.ms](https://sm.ms/)
 - [imgKr](https://imgkr.com/)
 - ...找到其他三无图床就再扩展
@@ -13,7 +16,7 @@
 ## 使用
 下载安装
 ```
-composer require hzz/free-pic -vvv
+composer require "hzz/free-pic @dev"
 ```
 
 上传图片到本地
