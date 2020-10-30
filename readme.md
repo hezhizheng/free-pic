@@ -13,7 +13,7 @@
 ## 使用
 下载安装
 ```
-composer
+composer require hzz/free-pic -vvv
 ```
 
 上传图片到本地
