@@ -38,7 +38,9 @@ $filepath = $fileEntity->upload($field_name,$dir);
 
 上传图片到第三方图床
 ```
-$serve = FreePic::create('img_kr'); // 通过不同类型初始化实现类 img_kr or sm
+// 通过不同类型初始化实现类
+// 支持参数类型(img_kr、sm、img_bb)
+$serve = FreePic::create('img_kr'); 
 // $serve->proxy = 'http://127.0.0.1:58591'; // 按需设置代理、sm.ms在移动网络下可能需要fq
 $url = $serve->upload($filepath);
 ```
