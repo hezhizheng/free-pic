@@ -2,34 +2,34 @@
 /**
  * Description:
  * Author: DexterHo(HeZhiZheng) <dexter.ho.cn@gmail.com>
- * Date: 2020/10/29
- * Time: 22:25
+ * Date: 2020/11/1
+ * Time: 12:33
  * Created by PhpStorm.
  */
 
 namespace Hzz;
 
-/**
- * Class ImgKr
- * @package Hzz
- */
-class ImgKr implements UploadPicInterface
+
+class ImgBB implements UploadPicInterface
 {
     /**
      * @param $file
-     * @return array|mixed
+     * @return mixed|string
      * @throws \Exception
      */
     public function upload($file)
     {
-        $this->url = UploadPicInterface::IMG_KR_URL;
+        $this->url = UploadPicInterface::IMG_BB;
         $this->filepath = $file;
-        $this->headers = [
-            'Referer: https://imgkr.com/'
+        $this->field_name = 'source';
+        $this->extra_params = [
+            'type' => 'file',
+            'action' => 'upload'
         ];
 
         $res = File::singleton()->http($this);
-        return isset($res["data"]) ? $res["data"] : '';
+
+        return isset($res["image"]["display_url"]) ? $res["image"]["display_url"] : '';
     }
 
     public function delete($file)

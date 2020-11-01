@@ -93,10 +93,13 @@ class File
      */
     public function http(UploadPicInterface $entity) // $entity
     {
-        $field_name = $entity->field_name ? $entity->field_name : 'file';
-        $url = $entity->url;
-        $headers = $entity->headers ? $entity->headers : [];
-        $filepath = $entity->filepath;
+        $field_name = isset($entity->field_name) ? $entity->field_name : 'file';
+        $url = isset($entity->url) ? $entity->url : '';
+        $headers = isset($entity->headers) ? $entity->headers : [];
+        $filepath = isset($entity->filepath) ? $entity->filepath : '';
+        $proxy = isset($entity->proxy) ? $entity->proxy : '';
+        $extra_params = isset($entity->extra_params) ? $entity->extra_params : [];
+
         try {
             $ch = curl_init();
 
@@ -111,6 +114,10 @@ class File
                 $data = array($field_name => '@' . realpath($filepath));//<=5.5
             }
 
+            if (is_array($extra_params) && count($extra_params)) {
+                $data = array_merge($data, $extra_params);
+            }
+
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_POST, 1);
@@ -121,8 +128,8 @@ class File
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-            if (!empty($entity->proxy)) {
-                curl_setopt($ch, CURLOPT_PROXY, $entity->proxy);
+            if (!empty($proxy)) {
+                curl_setopt($ch, CURLOPT_PROXY, $proxy);
             }
 
             $output = curl_exec($ch);

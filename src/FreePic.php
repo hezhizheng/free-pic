@@ -15,6 +15,7 @@ class FreePic
     private static $map = [
         'sm' => 'Hzz\Sm',
         'img_kr' => 'Hzz\ImgKr',
+        'img_bb' => 'Hzz\ImgBB',
     ];
 
     /**

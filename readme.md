@@ -15,6 +15,7 @@
 ## 支持图床
 - [sm.ms](https://sm.ms/)
 - [imgKr](https://imgkr.com/)
+- [imgBB](https://imgbb.com/upload)
 - ...找到其他三无图床就再扩展
 
 ## 使用
