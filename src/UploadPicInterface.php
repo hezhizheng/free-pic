@@ -24,6 +24,7 @@ interface UploadPicInterface
     const IMG_KR_URL = "https://imgkr.com/api/v2/files/upload";
     const SM_MS_URL = "https://sm.ms/api/v2/upload";
     const IMG_BB = "https://imgbb.com/json";
+    const FREE_IMAGE_HOST = "https://freeimage.host/json";
 
     public function upload($file);
 

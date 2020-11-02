@@ -16,6 +16,7 @@
 - [sm.ms](https://sm.ms/)
 - [imgKr](https://imgkr.com/)
 - [imgBB](https://imgbb.com/upload)
+- [FreeImageHost](https://freeimage.host/)
 - ...找到其他三无图床就再扩展
 
 ## 使用
@@ -39,7 +40,7 @@ $filepath = $fileEntity->upload($field_name,$dir);
 上传图片到第三方图床
 ```
 // 通过不同类型初始化实现类
-// 支持参数类型(img_kr、sm、img_bb)
+// 支持参数类型(img_kr、sm、img_bb、free_image_host)
 $serve = FreePic::create('img_kr'); 
 // $serve->proxy = 'http://127.0.0.1:58591'; // 按需设置代理、sm.ms在移动网络下可能需要fq
 $url = $serve->upload($filepath);

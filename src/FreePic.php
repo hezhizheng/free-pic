@@ -16,6 +16,7 @@ class FreePic
         'sm' => 'Hzz\Sm',
         'img_kr' => 'Hzz\ImgKr',
         'img_bb' => 'Hzz\ImgBB',
+        'free_image_host' => 'Hzz\FreeImageHost',
     ];
 
     /**
@@ -24,6 +25,13 @@ class FreePic
      */
     public static function create($type = 'img_kr')
     {
-        return new self::$map[$type];
+        $class = 'Hzz\\' . $type;
+        if (isset(self::$map[$type])) {
+            return new self::$map[$type];
+        } elseif (class_exists($class)) {
+            return new $class;
+        } else {
+            throw new \Exception("not support type: $type");
+        }
     }
 }

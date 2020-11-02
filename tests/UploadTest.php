@@ -36,7 +36,18 @@ class UploadTest extends \PHPUnit\Framework\TestCase
     {
         $serve = \Hzz\FreePic::create('img_bb');
 
-        $u = $serve->upload("E:\\www\\project\\dexter\\packagist\\free-pic\\tests\\1.png");
+        $u = $serve->upload("D:\\phpstudy_pro\\WWW\\org\\private-free-pic\\tests\\1.png");
+
+        var_dump($u);
+        $this->assertNotEmpty($u);
+
+    }
+
+    public function test_freePic_img_host_upload()
+    {
+        $serve = \Hzz\FreePic::create('FreeImageHost');
+
+        $u = $serve->upload("D:\\phpstudy_pro\\WWW\\org\\private-free-pic\\tests\\1.png");
 
         var_dump($u);
         $this->assertNotEmpty($u);
