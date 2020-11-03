@@ -1,6 +1,6 @@
 ## free-pic 免费图床 
 
-> [体验demo](http://free-pic.hzz.cool/upload.html)
+> [体验demo](http://free-pic.hzz.cool)
 
 > [github 地址](https://github.com/hezhizheng/free-pic)
 
