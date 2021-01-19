@@ -25,7 +25,9 @@ class Sm implements UploadPicInterface
         $this->url = UploadPicInterface::SM_MS_URL;
         $this->field_name = 'smfile';
         $this->filepath = $file;
-
+        $this->headers = [
+            'User-Agent:'.'PostmanRuntime/7.26.8'
+        ];
         $res = File::singleton()->http($this);
 
         if ( $res['code'] == 'success' )

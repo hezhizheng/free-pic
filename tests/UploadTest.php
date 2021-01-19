@@ -13,9 +13,9 @@ class UploadTest extends \PHPUnit\Framework\TestCase
     {
         $serve = \Hzz\FreePic::create('sm'); // img_kr or sm
 
-//        $serve->proxy = 'http://127.0.0.1:58591';
+        //$serve->proxy = 'http://127.0.0.1:58591';
 
-        $u = $serve->upload("E:\\www\\project\\dexter\\packagist\\free-pic\\tests\\1.png");
+        $u = $serve->upload("D:\\phpstudy_pro\\WWW\\org\\private-free-pic\\tests\\1.png");
 
         var_dump($u);
         $this->assertNotEmpty($u);

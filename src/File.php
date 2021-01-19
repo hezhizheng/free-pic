@@ -143,7 +143,13 @@ class File
 
             curl_close($ch);
 
-            return json_decode($output, true);
+            $res_ary = json_decode($output, true);
+
+            if ( !is_array($res_ary) )
+            {
+                throw new \Exception((string) $output);
+            }
+            return $res_ary;
         } catch (\Exception $exception) {
             throw new \Exception($exception->getMessage());
         }
