@@ -53,4 +53,15 @@ class UploadTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEmpty($u);
 
     }
+
+    public function test_vim_cn_upload()
+    {
+        $serve = \Hzz\FreePic::create('VimCn');
+
+        $u = $serve->upload("D:\\phpstudy_pro\\WWW\\org\\private-free-pic\\tests\\1.png");
+
+        var_dump($u);
+        $this->assertNotEmpty($u);
+
+    }
 }

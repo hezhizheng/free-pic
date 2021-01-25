@@ -25,6 +25,7 @@ interface UploadPicInterface
     const SM_MS_URL = "https://sm.ms/api/v2/upload";
     const IMG_BB = "https://imgbb.com/json";
     const FREE_IMAGE_HOST = "https://freeimage.host/json";
+    const VIM_CN = "https://img.vim-cn.com";
 
     public function upload($file);
 

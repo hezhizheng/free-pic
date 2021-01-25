@@ -17,6 +17,7 @@
 - [imgKr](https://imgkr.com/)
 - [imgBB](https://imgbb.com/upload)
 - [FreeImageHost](https://freeimage.host/)
+- [VimCn](https://img.vim-cn.com)
 - ...找到其他三无图床就再扩展
 
 ## 使用

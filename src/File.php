@@ -145,6 +145,13 @@ class File
 
             $res_ary = json_decode($output, true);
 
+            if ( $entity->url === UploadPicInterface::VIM_CN )
+            {
+                return [
+                    'image_url' => $output
+                ];
+            }
+
             if ( !is_array($res_ary) )
             {
                 throw new \Exception((string) $output);
