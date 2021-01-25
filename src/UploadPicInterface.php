@@ -26,6 +26,13 @@ interface UploadPicInterface
     const IMG_BB = "https://imgbb.com/json";
     const FREE_IMAGE_HOST = "https://freeimage.host/json";
     const VIM_CN = "https://img.vim-cn.com";
+    const CAT_BOX = "https://catbox.moe/user/api.php";
+
+    // 响应头为 text/html; 的接口
+    const TEXT_HTML_MAP = [
+        self::VIM_CN,
+        self::CAT_BOX
+    ];
 
     public function upload($file);
 

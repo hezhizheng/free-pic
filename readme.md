@@ -18,6 +18,7 @@
 - [imgBB](https://imgbb.com/upload)
 - [FreeImageHost](https://freeimage.host/)
 - [VimCn](https://img.vim-cn.com)
+- [CatBox](https://catbox.moe)
 - ...找到其他三无图床就再扩展
 
 ## 使用

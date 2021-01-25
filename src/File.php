@@ -145,7 +145,7 @@ class File
 
             $res_ary = json_decode($output, true);
 
-            if ( $entity->url === UploadPicInterface::VIM_CN )
+            if ( in_array($entity->url,UploadPicInterface::TEXT_HTML_MAP)  )
             {
                 return [
                     'image_url' => $output
