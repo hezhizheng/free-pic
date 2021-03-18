@@ -1,3 +1,5 @@
+# 推荐使用 [repo-storage](https://github.com/hezhizheng/repo-storage) 国内访问速度快
+
 ## free-pic 免费图床 
 
 > [体验demo](http://free-pic.hzz.cool)
