@@ -21,17 +21,6 @@ class UploadTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEmpty($u);
     }
 
-    public function test_freePic_img_kr_upload()
-    {
-        $serve = \Hzz\FreePic::create('img_kr'); // img_kr or sm
-
-        $u = $serve->upload("E:\\www\\project\\dexter\\packagist\\free-pic\\tests\\1.png");
-
-        var_dump($u);
-        $this->assertNotEmpty($u);
-
-    }
-
     public function test_freePic_img_bb_upload()
     {
         $serve = \Hzz\FreePic::create('img_bb');
