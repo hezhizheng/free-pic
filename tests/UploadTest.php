@@ -7,15 +7,20 @@
  * Created by PhpStorm.
  */
 
+/**
+ * ./vendor/bin/phpunit tests/UploadTest.php --filter test_cat_box_upload
+ */
 class UploadTest extends \PHPUnit\Framework\TestCase
 {
+    private $localPic = "D:\\e\\www\\hzz\\free-pic\\tests\\1.png";
+
     public function test_freePic_sm_upload()
     {
         $serve = \Hzz\FreePic::create('sm'); // img_kr or sm
 
         //$serve->proxy = 'http://127.0.0.1:58591';
 
-        $u = $serve->upload("D:\\phpstudy_pro\\WWW\\org\\private-free-pic\\tests\\1.png");
+        $u = $serve->upload($this->localPic);
 
         var_dump($u);
         $this->assertNotEmpty($u);
@@ -25,7 +30,7 @@ class UploadTest extends \PHPUnit\Framework\TestCase
     {
         $serve = \Hzz\FreePic::create('img_bb');
 
-        $u = $serve->upload("D:\\phpstudy_pro\\WWW\\org\\private-free-pic\\tests\\1.png");
+        $u = $serve->upload($this->localPic);
 
         var_dump($u);
         $this->assertNotEmpty($u);
@@ -36,7 +41,7 @@ class UploadTest extends \PHPUnit\Framework\TestCase
     {
         $serve = \Hzz\FreePic::create('FreeImageHost');
 
-        $u = $serve->upload("D:\\phpstudy_pro\\WWW\\org\\private-free-pic\\tests\\1.png");
+        $u = $serve->upload($this->localPic);
 
         var_dump($u);
         $this->assertNotEmpty($u);
@@ -47,7 +52,7 @@ class UploadTest extends \PHPUnit\Framework\TestCase
     {
         $serve = \Hzz\FreePic::create('VimCn');
 
-        $u = $serve->upload("D:\\phpstudy_pro\\WWW\\org\\private-free-pic\\tests\\1.png");
+        $u = $serve->upload($this->localPic);
 
         var_dump($u);
         $this->assertNotEmpty($u);
@@ -58,7 +63,7 @@ class UploadTest extends \PHPUnit\Framework\TestCase
     {
         $serve = \Hzz\FreePic::create('CatBox');
 
-        $u = $serve->upload("D:\\phpstudy_pro\\WWW\\org\\private-free-pic\\tests\\1.png");
+        $u = $serve->upload($this->localPic);
 
         var_dump($u);
         $this->assertNotEmpty($u);
