@@ -1,36 +1,29 @@
 <?php
-/**
- * Description:
- * Author: DexterHo(HeZhiZheng) <dexter.ho.cn@gmail.com>
- * Date: 2020/10/29
- * Time: 22:28
- * Created by PhpStorm.
- */
 
 namespace Hzz;
 
+use Hanson\Foundation\Foundation;
+use Hzz\ImgHost\CatBox;
+use Hzz\ImgHost\FreeImageHost;
+use Hzz\ImgHost\ImgBB;
+use Hzz\ImgHost\Sm;
+use Hzz\ServiceProvider\CatBoxServiceProvider;
+use Hzz\ServiceProvider\FreeImageHostServiceProvider;
+use Hzz\ServiceProvider\ImgBBServiceProvider;
+use Hzz\ServiceProvider\SmServiceProvider;
 
-class FreePic
+/**
+ * @property  ImgBB $imgBB
+ * @property  FreeImageHost $freeImageHost
+ * @property  Sm $sm
+ * @property  CatBox $catBox
+ */
+class FreePic extends Foundation
 {
-    private static $map = [
-        'sm' => 'Hzz\Sm',
-        'img_bb' => 'Hzz\ImgBB',
-        'free_image_host' => 'Hzz\FreeImageHost',
+    protected $providers = [
+        ImgBBServiceProvider::class,
+        FreeImageHostServiceProvider::class,
+        SmServiceProvider::class,
+        CatBoxServiceProvider::class,
     ];
-
-    /**
-     * @param $type
-     * @return mixed|UploadPicInterface
-     */
-    public static function create($type = 'img_kr')
-    {
-        $class = 'Hzz\\' . $type;
-        if (isset(self::$map[$type])) {
-            return new self::$map[$type];
-        } elseif (class_exists($class)) {
-            return new $class;
-        } else {
-            throw new \Exception("not support type: $type");
-        }
-    }
 }

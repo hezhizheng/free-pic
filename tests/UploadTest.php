@@ -1,72 +1,132 @@
 <?php
-/**
- * Description:
- * Author: DexterHo(HeZhiZheng) <dexter.ho.cn@gmail.com>
- * Date: 2020/10/29
- * Time: 23:15
- * Created by PhpStorm.
- */
 
 /**
- * ./vendor/bin/phpunit tests/UploadTest.php --filter test_cat_box_upload
+ * ./vendor/bin/phpunit tests/UploadTest.php --filter test_imgbb
  */
 class UploadTest extends \PHPUnit\Framework\TestCase
 {
     private $localPic = "D:\\e\\www\\hzz\\free-pic\\tests\\1.png";
 
-    public function test_freePic_sm_upload()
+    /**
+     * ./vendor/bin/phpunit tests/UploadTest.php --filter test_imgbb
+     * @return void
+     */
+    public function test_imgbb()
     {
-        $serve = \Hzz\FreePic::create('sm'); // img_kr or sm
+        $config = [
+            // 'app_key' => 'your-app-key',
+            // 'secret' => 'your-secret',
+            'debug' => true,
+            'log' => [
+                'name' => 'meituan',
+                'file' => __DIR__ . '/meituan.log',
+                'level' => 'debug',
+                'permission' => 0777,
+            ],
+        ];
 
-        //$serve->proxy = 'http://127.0.0.1:58591';
+        $params = [
+            "filepath" => $this->localPic,
+        ];
 
-        $u = $serve->upload($this->localPic);
+        $freePic = new \Hzz\FreePic($config);
 
-        var_dump($u);
-        $this->assertNotEmpty($u);
+        $res = $freePic->imgBB->upload($params);
+        $url = $freePic->imgBB->getUrl($res);
+        var_dump($res);
+        var_dump($url);
+        die;
     }
 
-    public function test_freePic_img_bb_upload()
+    /**
+     * ./vendor/bin/phpunit tests/UploadTest.php --filter test_freeImageHost
+     * @return void
+     */
+    public function test_freeImageHost()
     {
-        $serve = \Hzz\FreePic::create('img_bb');
+        $config = [
+            // 'app_key' => 'your-app-key',
+            // 'secret' => 'your-secret',
+            'debug' => true,
+            'log' => [
+                'name' => 'meituan',
+                'file' => __DIR__ . '/meituan.log',
+                'level' => 'debug',
+                'permission' => 0777,
+            ],
+        ];
 
-        $u = $serve->upload($this->localPic);
+        $params = [
+            "filepath" => $this->localPic,
+        ];
 
-        var_dump($u);
-        $this->assertNotEmpty($u);
+        $freePic = new \Hzz\FreePic($config);
 
+        $res = $freePic->freeImageHost->upload($params);
+        $url = $freePic->freeImageHost->getUrl($res);
+        var_dump($res);
+        var_dump($url);
+        die;
     }
 
-    public function test_freePic_img_host_upload()
+    /**
+     * ./vendor/bin/phpunit tests/UploadTest.php --filter sm
+     * @return void
+     */
+    public function test_sm()
     {
-        $serve = \Hzz\FreePic::create('FreeImageHost');
+        $config = [
+            'sm' => [
+                "token" => "Yuc4fb0BuwsOnd4y7R0zFp0tVGkxYgRa22"
+            ],
+            'debug' => true,
+            'log' => [
+                'name' => 'sm',
+                'file' => __DIR__ . '/sm.log',
+                'level' => 'debug',
+                'permission' => 0777,
+            ],
+        ];
 
-        $u = $serve->upload($this->localPic);
+        $params = [
+            "filepath" => $this->localPic,
+        ];
 
-        var_dump($u);
-        $this->assertNotEmpty($u);
+        $freePic = new \Hzz\FreePic($config);
 
+        $res = $freePic->sm->upload($params);
+
+        $url = $freePic->sm->getUrl($res);
+        var_dump($res);
+        var_dump($url);
+        die;
     }
 
-    public function test_vim_cn_upload()
+    /**
+     * ./vendor/bin/phpunit tests/UploadTest.php --filter catBox
+     * @return void
+     */
+    public function test_catBox()
     {
-        $serve = \Hzz\FreePic::create('VimCn');
+        $config = [
+            'debug' => true,
+            'log' => [
+                'name' => 'catBox',
+                'file' => __DIR__ . '/catBox.log',
+                'level' => 'debug',
+                'permission' => 0777,
+            ],
+        ];
 
-        $u = $serve->upload($this->localPic);
+        $params = [
+            "filepath" => $this->localPic,
+        ];
 
-        var_dump($u);
-        $this->assertNotEmpty($u);
+        $freePic = new \Hzz\FreePic($config);
 
-    }
-
-    public function test_cat_box_upload()
-    {
-        $serve = \Hzz\FreePic::create('CatBox');
-
-        $u = $serve->upload($this->localPic);
-
-        var_dump($u);
-        $this->assertNotEmpty($u);
-
+        $res = $freePic->catBox->upload($params);
+        $url = $freePic->catBox->getUrl($res);
+        var_dump($res);
+        var_dump($url);
     }
 }
