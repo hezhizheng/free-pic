@@ -23,7 +23,7 @@ class CatBox extends Api
 
         $response = $http->upload(self::URL, [], $files, $form_params);
 
-        $result = json_decode(strval($response->getBody()), true);
+        $result = strval($response->getBody());
 
         $this->checkRes($result);
 

@@ -18,8 +18,8 @@ class UploadTest extends \PHPUnit\Framework\TestCase
             // 'secret' => 'your-secret',
             'debug' => true,
             'log' => [
-                'name' => 'meituan',
-                'file' => __DIR__ . '/meituan.log',
+                'name' => 'imgbb',
+                'file' => __DIR__ . '/imgbb.log',
                 'level' => 'debug',
                 'permission' => 0777,
             ],
@@ -49,8 +49,8 @@ class UploadTest extends \PHPUnit\Framework\TestCase
             // 'secret' => 'your-secret',
             'debug' => true,
             'log' => [
-                'name' => 'meituan',
-                'file' => __DIR__ . '/meituan.log',
+                'name' => 'freeImageHost',
+                'file' => __DIR__ . '/freeImageHost.log',
                 'level' => 'debug',
                 'permission' => 0777,
             ],
