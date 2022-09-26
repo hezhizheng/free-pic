@@ -35,7 +35,7 @@ class UploadTest extends \PHPUnit\Framework\TestCase
         $url = $freePic->imgBB->getUrl($res);
         var_dump($res);
         var_dump($url);
-        die;
+        $this->assertNotEmpty($url);
     }
 
     /**
@@ -66,7 +66,7 @@ class UploadTest extends \PHPUnit\Framework\TestCase
         $url = $freePic->freeImageHost->getUrl($res);
         var_dump($res);
         var_dump($url);
-        die;
+        $this->assertNotEmpty($url);
     }
 
     /**
@@ -99,7 +99,7 @@ class UploadTest extends \PHPUnit\Framework\TestCase
         $url = $freePic->sm->getUrl($res);
         var_dump($res);
         var_dump($url);
-        die;
+        $this->assertNotEmpty($url);
     }
 
     /**
@@ -128,5 +128,6 @@ class UploadTest extends \PHPUnit\Framework\TestCase
         $url = $freePic->catBox->getUrl($res);
         var_dump($res);
         var_dump($url);
+        $this->assertNotEmpty($url);
     }
 }
