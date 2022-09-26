@@ -53,7 +53,7 @@ $res = $freePic->imgBB->upload($params); // 这里返回的是对应图床服务
 $url = $freePic->imgBB->getUrl($res);
 ```
 
-详细用法可参考 [tests](./tests/UploadTest.php) 用例
+详细用法可参考 [tests](./tests/UploadTest.php) 用例 或 [upload.php](./tests/upload.php)
 
 ## License
 [MIT](./LICENSE.txt)
