@@ -1,6 +1,6 @@
 ## free-pic 一个第三方免费图床扩展包 
 
-> [体验demo](http://free-pic.hzz.cool)
+> [体验demo](http://117.50.186.143:5000/)
 
 > [github 地址](https://github.com/hezhizheng/free-pic)
 
